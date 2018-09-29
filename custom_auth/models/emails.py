@@ -5,7 +5,7 @@ from custom_auth.models import CustomUser as User
 class EmailAddress(models.Model):
     '''
     '''
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, models.CASCADE)
     email_address = models.EmailField(max_length=100, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'custom_auth.apps.CustomAuthConfig',
 ]
 
 MIDDLEWARE = [
@@ -75,12 +76,16 @@ WSGI_APPLICATION = 'user_custom_auth.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'user_auth',
+        'USER': '',
+        'PASSWORD': ''
     }
 }
 
+AUTH_USER_MODEL = 'custom_auth.CustomUser'
 
+AUTHENTICATION_BACKENDS = ['custom_auth.backends.AuthBackend']
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -102,6 +107,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
+
+#user block time expires in 5 min i.e 300 seconds
+BLOCKED_EXPIRE_TIME = 300
 
 LANGUAGE_CODE = 'en-us'
 

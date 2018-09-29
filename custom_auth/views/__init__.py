@@ -1,3 +1,3 @@
-from .login import LoginView
+from .login import LoginView, logout_view
 from .signup import SignupView
-from .user_profile import HomeView
+from .user_profile import *

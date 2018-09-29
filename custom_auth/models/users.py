@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     '''
     '''
+    location = models.CharField(max_length=200, null=True, blank=True)
     block_count = models.IntegerField(default=0)
     is_block = models.BooleanField(default=False)
     block_date_time = models.DateTimeField(null=True, blank=True)

@@ -49,3 +49,6 @@ class LoginView(FormView):
         context = self.get_context_data()
         context['form'] = form
         return self.render_to_response(context)
+
+def logout_view(request):
+    logout(request)

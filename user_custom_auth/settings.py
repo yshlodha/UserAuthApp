@@ -111,6 +111,8 @@ AUTH_PASSWORD_VALIDATORS = [
 #user block time expires in 5 min i.e 300 seconds
 BLOCKED_EXPIRE_TIME = 300
 
+GEOIP_PATH = os.path.join(BASE_DIR, 'geoip2')
+
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'

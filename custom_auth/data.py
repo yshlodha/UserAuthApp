@@ -3,7 +3,7 @@ from django.contrib.auth.hashers import make_password
 from custom_auth.models import *
 
 
-def create_user(email, password, username=None):
+def create_user(email, password, username=None, location=None):
     """
     :param email:
     :param password:
@@ -12,7 +12,8 @@ def create_user(email, password, username=None):
     """
     password = make_password(password)
     user = CustomUser.objects.create(email=email, password=password,
-                                     username=username, is_active=True, is_staff=True)
+                                     username=username, location=location,
+                                     is_active=True, is_staff=True)
 
     create_user_extra_email(user, email, is_primary=True)
 
@@ -34,3 +35,9 @@ def get_user_emails(user):
     :return:
     """
     emails = EmailAddress.objects.filter(user=user).values_list('email_address', flat=True)
+    return emails
+
+def set_primary(user, email_address):
+    email = EmailAddress.objects.get(user=user, email_address=email_address)
+    email.is_primary = True
+    email.save()

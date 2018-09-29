@@ -16,8 +16,8 @@ class EmailAddress(models.Model):
 
     def save(self, *args, **kwargs):
         if self.is_primary:
-            user.email = self.email_address
-            user.save()
+            self.user.email = self.email_address
+            self.user.save()
         super(EmailAddress, self).save(*args, **kwargs)
 
     class Meta:

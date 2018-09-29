@@ -18,6 +18,7 @@ class AuthBackend(ModelBackend):
                 # Create a new user. There's no need to set a password
                 # because only the password from settings.py is checked.
              return None
+
         if user.is_blocked():
             raise ValidationError('User is Blocked. Please Try after sometime')
         if check_password(password, user.password):
@@ -33,10 +34,12 @@ class AuthBackend(ModelBackend):
         '''
         if not user.is_block:
             user.block_count += 1
-            if user.block_count == 3:
+            if user.block_count >= 3:
                 user.is_block = True
                 user.block_date_time = timezone.now()
             user.save()
+
+
 
     def get_user(self, user_id):
         try:

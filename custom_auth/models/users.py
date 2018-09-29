@@ -24,12 +24,13 @@ class CustomUser(AbstractUser):
         if self.is_block:
             now = timezone.now()
             last_block = self.block_date_time
-            total_time_user_blocked = now - last_blocked
-            if total_time_user_blocked <= 300:
+            total_time_user_blocked = now - last_block
+            if total_time_user_blocked.seconds <= settings.BLOCKED_EXPIRE_TIME:
                 return True
             else:
                 self.block_date_time = None
                 self.is_block = False
+                self.block_count = 0
                 self.save()
                 return False
         return False
